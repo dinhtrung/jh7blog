@@ -47,6 +47,7 @@ spec:
       containers:
         - name: blog-app
           image: localhost:32000/blog
+          imagePullPolicy: Always
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: prod

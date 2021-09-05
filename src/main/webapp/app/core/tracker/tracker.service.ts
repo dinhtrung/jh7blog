@@ -32,6 +32,7 @@ export class TrackerService {
     if (authToken) {
       url += '?access_token=' + authToken;
     }
+    url = url.replace('#', '');
     const socket: WebSocket = new SockJS(url);
     this.stompClient = Stomp.over(socket, { protocols: ['v12.stomp'] });
     const headers: Stomp.ConnectionHeaders = {};

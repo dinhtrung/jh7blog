@@ -84,6 +84,9 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: jhipster-grafana
-              servicePort: 3000
+              service:
+                name: jhipster-grafana
+                port:
+                  number: 3000

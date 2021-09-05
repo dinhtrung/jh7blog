@@ -9,6 +9,9 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: blog
-              servicePort: 8080
+              service:
+                name: blog
+                port:
+                  number: 8080

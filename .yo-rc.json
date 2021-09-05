@@ -46,7 +46,7 @@
     "appsFolders": ["jh7app"],
     "directoryPath": "../",
     "clusteredDbApps": {},
-    "dockerRepositoryName": "registry.container-registry",
+    "dockerRepositoryName": "localhost:32000",
     "dockerPushCommand": "docker push",
     "kubernetesNamespace": "app",
     "kubernetesServiceType": "Ingress",
