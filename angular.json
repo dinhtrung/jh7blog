@@ -23,6 +23,7 @@
             "customWebpackConfig": {
               "path": "./webpack/webpack.custom.js"
             },
+            "allowedCommonJsDependencies": ["dayjs/locale/vi", "sockjs-client"],
             "outputPath": "build/resources/main/static/",
             "index": "src/main/webapp/index.html",
             "main": "src/main/webapp/main.ts",
@@ -109,6 +110,7 @@
   },
   "defaultProject": "blog",
   "cli": {
+    "analytics": false,
     "packageManager": "npm"
   }
 }

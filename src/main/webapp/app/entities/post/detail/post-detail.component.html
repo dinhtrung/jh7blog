@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="post">
+      <h2 data-cy="postDetailsHeading"><span jhiTranslate="blogApp.post.detail.title">Post</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ post.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.title">Title</span></dt>
+        <dd>
+          <span>{{ post.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.slug">Slug</span></dt>
+        <dd>
+          <span>{{ post.slug }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.summary">Summary</span></dt>
+        <dd>
+          <span>{{ post.summary }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.body">Body</span></dt>
+        <dd>
+          <span>{{ post.body }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.createdAt">Created At</span></dt>
+        <dd>
+          <span>{{ post.createdAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ post.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.publishedDate">Published Date</span></dt>
+        <dd>
+          <span>{{ post.publishedDate | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.state">State</span></dt>
+        <dd>
+          <span>{{ post.state }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.tags">Tags</span></dt>
+        <dd>
+          <span>{{ post.tags }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.updatedAt">Updated At</span></dt>
+        <dd>
+          <span>{{ post.updatedAt | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.updatedBy">Updated By</span></dt>
+        <dd>
+          <span>{{ post.updatedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="blogApp.post.category">Category</span></dt>
+        <dd>
+          <div *ngIf="post.category">
+            <a [routerLink]="['/category', post.category?.id, 'view']">{{ post.category?.name }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/post', post.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

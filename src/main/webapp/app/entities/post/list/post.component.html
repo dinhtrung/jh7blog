@@ -1,0 +1,131 @@
+<div>
+  <h2 id="page-heading" data-cy="PostHeading">
+    <span jhiTranslate="blogApp.post.home.title">Posts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="reset()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="blogApp.post.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-post"
+        [routerLink]="['/post/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="blogApp.post.home.createLabel"> Create a new Post </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="searchForm" class="form-inline">
+        <div class="input-group w-100 mt-3">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="currentSearch"
+            id="currentSearch"
+            name="currentSearch"
+            placeholder="{{ 'blogApp.post.home.search' | translate }}"
+          />
+
+          <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+            <fa-icon icon="search"></fa-icon>
+          </button>
+
+          <button class="input-group-append btn btn-danger" (click)="search('')" *ngIf="currentSearch">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="posts?.length === 0">
+    <span jhiTranslate="blogApp.post.home.notFound">No posts found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="posts && posts.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="title"><span jhiTranslate="blogApp.post.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="slug"><span jhiTranslate="blogApp.post.slug">Slug</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="summary"><span jhiTranslate="blogApp.post.summary">Summary</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="body"><span jhiTranslate="blogApp.post.body">Body</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="createdAt">
+            <span jhiTranslate="blogApp.post.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <span jhiTranslate="blogApp.post.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="publishedDate">
+            <span jhiTranslate="blogApp.post.publishedDate">Published Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="state"><span jhiTranslate="blogApp.post.state">State</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="tags"><span jhiTranslate="blogApp.post.tags">Tags</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="updatedAt">
+            <span jhiTranslate="blogApp.post.updatedAt">Updated At</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="updatedBy">
+            <span jhiTranslate="blogApp.post.updatedBy">Updated By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="category.name">
+            <span jhiTranslate="blogApp.post.category">Category</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+        <tr *ngFor="let post of posts; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/post', post.id, 'view']">{{ post.id }}</a>
+          </td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.slug }}</td>
+          <td>{{ post.summary }}</td>
+          <td>{{ post.body }}</td>
+          <td>{{ post.createdAt | formatMediumDatetime }}</td>
+          <td>{{ post.createdBy }}</td>
+          <td>{{ post.publishedDate | formatMediumDate }}</td>
+          <td>{{ post.state }}</td>
+          <td>{{ post.tags }}</td>
+          <td>{{ post.updatedAt | formatMediumDatetime }}</td>
+          <td>{{ post.updatedBy }}</td>
+          <td>
+            <div *ngIf="post.category">
+              <a [routerLink]="['/category', post.category?.id, 'view']">{{ post.category?.name }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/post', post.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/post', post.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(post)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

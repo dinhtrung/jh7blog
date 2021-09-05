@@ -74,7 +74,6 @@ server:
 #
 # Full reference is available at: https://www.jhipster.tech/common-application-properties/
 # ===================================================================
-
 jhipster:
   cache: # Cache configuration
     redis: # Redis configuration

@@ -29,7 +29,7 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
-
+import { DEBUG_INFO_ENABLED } from './app.constants';
 @NgModule({
   imports: [
     BrowserModule,
@@ -39,7 +39,7 @@ import { SidebarComponent } from './layouts/sidebar/sidebar.component';
     EntityRoutingModule,
     AppRoutingModule,
     // Set this to true to enable service worker (PWA)
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: !DEBUG_INFO_ENABLED }),
     HttpClientModule,
     NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-', caseSensitive: true }),
     TranslateModule.forRoot({

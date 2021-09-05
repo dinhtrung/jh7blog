@@ -42,6 +42,21 @@
     "jwtSecretKey": "NWU1MDU4NzcwMTMwMDM5YzFkM2VhYjZiYzRmN2I2NWU1YmFjNDJiNjVmYjZmMGNiZDY2OGE3YThjYzdlYjNkNzJkODFjMjkyNjU2MDc1Njg3OWJjNjFlN2I4NjAzNzJjNDE2OTI2YzNmNjE3YTNiNDk0YTI1MGFkMzdlZWMyMGI=",
     "devServerPort": 4200,
     "clientPackageManager": "npm",
-    "languages": ["en", "vi"]
+    "languages": ["en", "vi"],
+    "appsFolders": ["jh7app"],
+    "directoryPath": "../",
+    "clusteredDbApps": {},
+    "dockerRepositoryName": "registry.container-registry",
+    "dockerPushCommand": "docker push",
+    "kubernetesNamespace": "app",
+    "kubernetesServiceType": "Ingress",
+    "ingressType": "nginx",
+    "ingressDomain": "192.168.99.100.nip.io",
+    "monitoring": "prometheus",
+    "istio": false,
+    "lastLiquibaseTimestamp": 1630812213000,
+    "entities": ["Category", "Post"],
+    "kubernetesUseDynamicStorage": true,
+    "kubernetesStorageClassName": ""
   }
 }

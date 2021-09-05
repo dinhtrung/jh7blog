@@ -15,12 +15,24 @@
   </div>
   <nav class="sidebar-menu pt-3 pb-3">
     <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-    <ul class="menu-items" *jhiHasAnyAuthority="['ROLE_ADMIN', 'SALES']">
+    <ul class="menu-items">
       <li class="menu-header">
         <span>
           <fa-icon icon="th-list"></fa-icon>
           <span jhiTranslate="global.menu.entities.main">Entities</span>
         </span>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="category" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="th-list" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.entities.category">Category</span>
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="post" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="th-list" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.entities.post">Post</span>
+        </a>
       </li>
       <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
     </ul>
@@ -32,43 +44,43 @@
         </span>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.userManagement">User management</span>
         </a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="admin/tracker" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/tracker" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="eye" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.tracker">User tracker</span>
         </a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
         </a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.health">Health</span>
         </a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
         </a>
       </li>
       <li>
-        <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.logs">Logs</span>
         </a>
       </li>
       <li *ngIf="openAPIEnabled">
-        <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+        <a class="menu-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
           <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
           <span jhiTranslate="global.menu.admin.apidocs">API</span>
         </a>
