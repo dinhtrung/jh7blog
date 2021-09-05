@@ -1,0 +1,79 @@
+<aside class="sidebar shadow-sm" *ngIf="account">
+  <div class="sidebar-profile d-flex flex-column justify-content-center pt-5 pb-3">
+    <div class="picture-wrapper mb-4">
+      <div class="user-picture m-auto text-primary">
+        <fa-icon icon="user-circle" size="4x"></fa-icon>
+      </div>
+    </div>
+    <div class="profile-details text-center pb-4">
+      <p class="mb-0 text-uppercase name" jhiTranslate="global.title">SMPP Tools</p>
+      <small class="text-uppercase role" jhiTranslate="global.subtitle">Traffic Generator</small>
+    </div>
+  </div>
+  <div class="sidebar-search pt-1 pb-1 pl-3 pr-3">
+    <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ..." />
+  </div>
+  <nav class="sidebar-menu pt-3 pb-3">
+    <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+    <ul class="menu-items" *jhiHasAnyAuthority="['ROLE_ADMIN', 'SALES']">
+      <li class="menu-header">
+        <span>
+          <fa-icon icon="th-list"></fa-icon>
+          <span jhiTranslate="global.menu.entities.main">Entities</span>
+        </span>
+      </li>
+      <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+    </ul>
+    <ul class="menu-items" *jhiHasAnyAuthority="'ROLE_ADMIN'">
+      <li class="menu-header">
+        <span>
+          <fa-icon icon="users-cog"></fa-icon>
+          <span jhiTranslate="global.menu.admin.main">Administration</span>
+        </span>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.userManagement">User management</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/tracker" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="eye" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.tracker">User tracker</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/metrics" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="tachometer-alt" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.metrics">Metrics</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/health" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="heart" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.health">Health</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/configuration" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="cogs" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.configuration">Configuration</span>
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="admin/logs" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="tasks" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.logs">Logs</span>
+        </a>
+      </li>
+      <li *ngIf="openAPIEnabled">
+        <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
+          <fa-icon icon="book" [fixedWidth]="true"></fa-icon>
+          <span jhiTranslate="global.menu.admin.apidocs">API</span>
+        </a>
+      </li>
+      <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+    </ul>
+  </nav>
+</aside>

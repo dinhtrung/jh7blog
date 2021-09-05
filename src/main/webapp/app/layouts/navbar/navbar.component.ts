@@ -8,7 +8,7 @@ import { LANGUAGES } from 'app/config/language.constants';
 import { Account } from 'app/core/auth/account.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { LoginService } from 'app/login/login.service';
-import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -16,19 +16,17 @@ import { ProfileService } from 'app/layouts/profiles/profile.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  inProduction?: boolean;
-  isNavbarCollapsed = true;
+  // isNavbarCollapsed = true;
   languages = LANGUAGES;
-  openAPIEnabled?: boolean;
   version = '';
   account: Account | null = null;
 
   constructor(
+    private layoutService: LayoutService, // + sidebar
     private loginService: LoginService,
     private translateService: TranslateService,
     private sessionStorageService: SessionStorageService,
     private accountService: AccountService,
-    private profileService: ProfileService,
     private router: Router
   ) {
     if (VERSION) {
@@ -37,10 +35,6 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getProfileInfo().subscribe(profileInfo => {
-      this.inProduction = profileInfo.inProduction;
-      this.openAPIEnabled = profileInfo.openAPIEnabled;
-    });
     this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
   }
 
@@ -50,7 +44,11 @@ export class NavbarComponent implements OnInit {
   }
 
   collapseNavbar(): void {
-    this.isNavbarCollapsed = true;
+    this.layoutService.isNavbarCollapsed = true;
+  }
+
+  isNavbarCollapsed(): boolean {
+    return this.layoutService.isNavbarCollapsed;
   }
 
   login(): void {
@@ -64,6 +62,14 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleNavbar(): void {
-    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+    this.layoutService.toggleNavbar();
+  }
+
+  // + sidebar
+  toggleSidebarPin(): void {
+    this.layoutService.toggleSidebarPin();
+  }
+  toggleSidebar(): void {
+    this.layoutService.toggleSidebar();
   }
 }

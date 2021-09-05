@@ -171,3 +171,18 @@ ui bootstrap tweaks
 }
 
 /* jhipster-needle-scss-add-main JHipster will add new css style */
+
+.wrapper .navbar-brand {
+  width: 270px;
+  text-align: center;
+}
+.wrapper.pinned-sidebar .navbar-brand {
+  width: 70px;
+}
+
+.wrapper.pinned-sidebar {
+  .navbar-version,
+  .navbar-title {
+    display: none;
+  }
+}
